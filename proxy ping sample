@@ -1,0 +1,20 @@
+import subprocess
+
+def ping_site(proxy_list, site_url):
+    for proxy in proxy_list:
+        proxy_address = proxy.strip()
+        command = f"ping -n 1 -w 1000 -4 {site_url} -S {proxy_address}"
+        subprocess.run(command, shell=True)
+
+# Specify the path to the proxy list file
+proxy_file_path = "path/to/proxy_list.txt"
+
+# Specify the site URL you want to ping
+site_url = "www.example.com"
+
+# Read the proxy list from the file
+with open(proxy_file_path, "r") as proxy_file:
+    proxy_list = proxy_file.readlines()
+
+# Ping the site using the proxies from the list
+ping_site(proxy_list, site_url)
